@@ -17,14 +17,6 @@ export interface StatItem {
 }
 
 
-export interface SocialLinkItem {
-  id: string;
-  name: string;
-  handle: string;
-  url: string;
-  color: string;
-}
-
 export interface AboutConfig {
   eyebrow: string;
   heading: string;
@@ -45,7 +37,6 @@ export interface SiteConfig {
   navLinks: NavLink[];
   topics: TopicItem[];
   stats: StatItem[];
-  links: SocialLinkItem[];
   about: AboutConfig;
 }
 
@@ -61,29 +52,6 @@ export const siteConfig: SiteConfig = {
     { label: "Work", href: "#posts" },
     { label: "Topics", href: "#topics" },
     { label: "Follow", href: "#links" },
-  ],
-  links: [
-    {
-      id: "instagram",
-      name: "Instagram",
-      handle: "@shwetdaily",
-      url: "https://instagram.com/shwetdaily",
-      color: "#E1306C",
-    },
-    {
-      id: "github",
-      name: "GitHub",
-      handle: "github.com/shwetankrai12",
-      url: "https://github.com/shwetankrai12",
-      color: "#C9D1D9",
-    },
-    {
-      id: "linkedin",
-      name: "LinkedIn",
-      handle: "in/shwetankrai12",
-      url: "https://www.linkedin.com/in/shwetankrai12",
-      color: "#2D7DD2",
-    },
   ],
   about: {
     eyebrow: "ABOUT THE BUILDER",

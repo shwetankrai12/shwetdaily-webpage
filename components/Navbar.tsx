@@ -6,8 +6,6 @@ import { Menu, X } from "lucide-react";
 import { motion, AnimatePresence } from "framer-motion";
 import { Button, InstagramIcon } from "@/components/Button";
 
-export { InstagramIcon };
-
 export const Navbar = () => {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
 
