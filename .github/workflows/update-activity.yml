@@ -1,0 +1,45 @@
+name: Update Activity Data
+
+on:
+  schedule:
+    # Run hourly at minute 0
+    - cron: '0 * * * *'
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+jobs:
+  sync-activity:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: 20
+
+      - name: Fetch activity data
+        env:
+          IG_ACCESS_TOKEN: ${{ secrets.IG_ACCESS_TOKEN }}
+        run: |
+          node scripts/fetch-activity.mjs
+
+      - name: Commit and push changes if updated
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "github-actions[bot]@users.noreply.github.com"
+          
+          # Check if data/activity.json or public/data/activity.json changed
+          if git diff --quiet data/activity.json public/data/activity.json; then
+            echo "No activity data changes detected. Skipping commit."
+          else
+            echo "Activity data changed. Committing update..."
+            git add data/activity.json public/data/activity.json data/.ig_token_meta.json 2>/dev/null || true
+            git commit -m "chore(data): auto-update activity.json [skip ci]"
+            git push
+          fi
