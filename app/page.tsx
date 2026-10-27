@@ -1,6 +1,6 @@
 import { Navbar } from "@/components/Navbar";
 import { Hero } from "@/components/Hero";
-import { LinkCables } from "@/components/LinkCables";
+import { ActivityCity } from "@/components/ActivityCity";
 import { Topics } from "@/components/Topics";
 import { Posts } from "@/components/Posts";
 import { About } from "@/components/About";
@@ -12,7 +12,7 @@ export default function Home() {
     <main id="top" className="min-h-screen bg-[#0A0A0A] text-[#F5F2E8] flex flex-col selection:bg-[#39FF14] selection:text-[#0A0A0A]">
       <Navbar />
       <Hero />
-      <LinkCables />
+      <ActivityCity />
       <Topics />
       <Posts />
       <About />

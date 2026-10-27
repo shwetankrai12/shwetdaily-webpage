@@ -8,7 +8,7 @@ import { ArrowLeft, ArrowRight, ArrowUpRight, Play } from "lucide-react";
 import { InstagramIcon } from "./Button";
 import { motion, AnimatePresence, useReducedMotion } from "framer-motion";
 
-export const GithubIcon = ({ className = "w-3.5 h-3.5" }: { className?: string }) => (
+const GithubIcon = ({ className = "w-3.5 h-3.5" }: { className?: string }) => (
   <svg
     viewBox="0 0 24 24"
     fill="none"
