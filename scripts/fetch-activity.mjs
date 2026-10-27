@@ -170,7 +170,7 @@ async function maybeRefreshToken(token) {
         tokenAgeDays = ageMs / (1000 * 60 * 60 * 24);
       }
     }
-  } catch (e) {
+  } catch {
     // ignore
   }
 

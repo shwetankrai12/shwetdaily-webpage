@@ -141,7 +141,7 @@ export const ActivityCity: React.FC = () => {
   } | null>(null);
 
   const [isDraggingState, setIsDraggingState] = useState(false);
-  const [webglAvailable, setWebglAvailable] = useState<boolean>(true);
+  const [webglAvailable] = useState<boolean>(() => typeof window === "undefined" || isWebGLSupported());
   const [isMobile, setIsMobile] = useState<boolean>(false);
 
   // Active layer ref for animation loop
@@ -275,7 +275,6 @@ export const ActivityCity: React.FC = () => {
   // 3D LIGHT ISOMETRIC SKYLINE IMPLEMENTATION
   useEffect(() => {
     if (!isWebGLSupported()) {
-      setWebglAvailable(false);
       return;
     }
 
@@ -378,7 +377,9 @@ export const ActivityCity: React.FC = () => {
         return { fitDist, lookAtY };
       };
 
-      let { fitDist: defaultDist, lookAtY: currentLookAtY } = computeAutoFitDistance(H_BASE, aspect);
+      const initialFit = computeAutoFitDistance(H_BASE, aspect);
+      let defaultDist = initialFit.fitDist;
+      const currentLookAtY = initialFit.lookAtY;
       let targetDist = defaultDist;
       let currentDist = defaultDist;
 
@@ -557,9 +558,9 @@ export const ActivityCity: React.FC = () => {
 
       // State arrays for 400ms smooth transition
       let currentLayerMode = activeLayerRef.current;
-      let computed = computeHeightsAndColors(currentLayerMode);
-      let activeH = computed.heights;
-      let activeC = computed.colors;
+      const computed = computeHeightsAndColors(currentLayerMode);
+      const activeH = computed.heights;
+      const activeC = computed.colors;
 
       let fromH = new Float32Array(activeH);
       let toH = new Float32Array(activeH);
